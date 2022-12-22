@@ -57,35 +57,53 @@ function RadioGroup() {
   };
   const handleDrop = (e, index) => {
     e.preventDefault();
+    const copy = [...items];
+   
+    
+    const item1 = copy[dragItem.current];
+    const item2 = copy[dragOverItem.current];
+    copy.splice(dragItem.current, 1, item2);
+    copy.splice(dragOverItem.current, 1, item1);
+ 
+    setItems(copy);
   };
-  const handleDragEnter = (e) => {
+  const handleDragEnter = (e, index) => {
     e.preventDefault();
+    dragEnterItem.current = index;
     const copy = [...items];
     const item1 = copy[dragItem.current];
     const item2 = copy[dragOverItem.current];
     copy.splice(dragItem.current, 1, item2);
     copy.splice(dragOverItem.current, 1, item1);
-
+  
     setItems(copy);
+   
+  };
+  const handleDragEnd = (e) => {
+    e.preventDefault();
   };
   return (
     <StyledDiv WD="38rem">
       {items.map((item, index) => {
         return (
-          <StyledDiv DP="flex" WD="18rem" HG="4rem" >
-            <StyledDiv
-              DP="flex"
-              HG="2rem"
-              WD="15rem"
-              BG="white"
-              BD="1px solid black"
-              BR="12px"
-              AI="center"
-              onDragEnter={(e) => handleDragEnter(e)}
-              onDragOver={(e) => handleDragOver(e, index)}
+          <StyledDiv
+            DP="flex"
+            MBS="1.5rem"
+            WD="fit-content"
+            BG={item.value ? "whiteSmoke" : ""}
+            onDragOver={(e) => handleDragOver(e, index)}
+              onDragEnter={(e) => handleDragEnter(e, index)}
               onDrop={(e) => handleDrop(e)}
               onDrag={(e) => handleDrag(e, index)}
+              onDragEnd={(e) => handleDragEnd(e)}
               draggable
+          >
+            <StyledDiv
+              WD="fit-content"
+              DP="flex"
+              PD=".5rem"
+              BR="22px"
+             
             >
               <StyledDiv DP="flex">
                 <IoIosRemoveCircle
@@ -106,6 +124,7 @@ function RadioGroup() {
                       boxShadow: "inset 0px 1px 2px rgb(0 0 0 / 15%)",
                       flexShrink: "0",
                     }}
+                    JC="center"
                     BR="12px"
                     BD="none"
                     ML="12px"
@@ -117,7 +136,6 @@ function RadioGroup() {
                 <SurveyInput
                   DP="flex"
                   contentEditable="true"
-                  OW="none"
                   WW="break-word"
                   WB="break-word"
                   placeholder={`item${item.id}`}
@@ -132,7 +150,7 @@ function RadioGroup() {
         );
       })}
 
-      <StyledDiv AI="center" MBS="1.5rem" DP="flex">
+      <StyledDiv AI="center" DP="flex" MBS="1rem">
         <StyledDiv DP="flex" JC="center">
           <StyledDiv DP="flex">
             <IoIosAddCircle
@@ -165,7 +183,7 @@ function RadioGroup() {
             <SurveyInput
               DP="flex"
               contentEditable="true"
-              OW="none"
+              OW="break-word"
               WW="break-word"
               WB="break-word"
               placeholder={`item${items.length + 1}`}

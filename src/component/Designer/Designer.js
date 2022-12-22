@@ -4,7 +4,6 @@ import {
   StyledUl,
   StyledLi,
   StyledLink,
- 
 } from "../mainComponent/Styles";
 import { Outlet } from "react-router-dom";
 
@@ -56,7 +55,7 @@ function Designer() {
     <StyledDiv DP="flex" POT="absolute" HG="580px">
       <StyledDiv DP="flex" WD="10%" ML="calc(-1.5 * var(--base-unit, 8px))">
         <StyledUl DP="inline-block">
-          <StyledLi>
+          <StyledLi draggable>
             <b>
               <MdRadioButtonChecked />
             </b>
@@ -70,13 +69,12 @@ function Designer() {
               to="/Designer/RadioGroup"
               id="Radio"
               style={{ background: color }}
-             
             >
               <i>Radio group</i>
             </StyledLink>
           </StyledLi>
 
-          <StyledLi>
+          <StyledLi draggable>
             <b>
               <MdStarOutline />
             </b>
