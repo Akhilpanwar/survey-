@@ -25,6 +25,7 @@ import { HiOutlineDuplicate } from "react-icons/hi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { BsImage } from "react-icons/bs";
 import "bootstrap/dist/css/bootstrap.min.css";
+import dropdown from './dropdown';
 function CenterDesigner({ show, callQuestion, Question, Remove, DUP, props }) {
   console.log(props);
   const [Title, setTitle] = useState(true);
